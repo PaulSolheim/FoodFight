@@ -1237,4 +1237,39 @@ anims/Working = SubResource( 5 )
 blend_times = [  ]
 _sections_unfolded = [ "Playback Options" ]
 
+[node name="AnimationTreePlayer" type="AnimationTreePlayer" parent="." index="2"]
+
+playback_process_mode = 1
+master_player = NodePath("../AnimationPlayer")
+base_path = NodePath("..")
+active = true
+data = {
+"active": true,
+"connections": [ "Move", "out", 0, "Idleanim", "Move", 0, "Walkanim", "Move", 1 ],
+"master": NodePath("../AnimationPlayer"),
+"nodes": [ {
+"id": "out",
+"position": Vector2( 866, 104 ),
+"type": "output"
+}, {
+"blend": 0.14,
+"filter": [  ],
+"id": "Move",
+"position": Vector2( 500, 64 ),
+"type": "blend2"
+}, {
+"filter": [  ],
+"from": "Idle",
+"id": "Idleanim",
+"position": Vector2( 162, 68 ),
+"type": "animation"
+}, {
+"filter": [  ],
+"from": "Run",
+"id": "Walkanim",
+"position": Vector2( 165, 203 ),
+"type": "animation"
+} ]
+}
+
 

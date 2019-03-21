@@ -8,11 +8,17 @@ var motion = Vector3()
 var facing_direction = 0
 
 # animation constants
+const BLEND_MINIMUM = 0.125
+const RUN_BLEND_AMOUNT = 0.1
+const IDLE_BLEND_AMOUNT = 0.07
 
+# ANIMATION VARIABLES
+var move_state = 0  # 0 er idle, 1 er run
 
 func _process(delta):
 	move()
 	face_forward()
+	animate()
 
 func move():
 	motion = Vector3(0,0,0)
@@ -33,4 +39,17 @@ func move():
 
 func face_forward():
 	$Armature.rotation.y = facing_direction
+
+func animate():
+	var animate = $Armature/AnimationTreePlayer
+	if motion.length() > BLEND_MINIMUM:
+		move_state += RUN_BLEND_AMOUNT
+	else:
+		move_state -= IDLE_BLEND_AMOUNT
+	
+	move_state = clamp(move_state, 0, 1)
+	
+	animate.blend2_node_set_amount("Move", move_state)
+
+
 	
