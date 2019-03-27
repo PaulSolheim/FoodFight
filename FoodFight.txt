@@ -125,3 +125,141 @@ Test spillet, du må kanskje
 flytte litt på kameraet i scenen.
 
 Voila! Kommer du hit er det veldig bra!
+
+Start 3.Gang
+
+Hent fra Github:
+github.com/PaulSolheim/FoodFight
+
+Pakk ut, Skann og Åpne i Godot
+
+La oss gjøre Level1 til default:
+Åpne Prosjektinnstillinger
+Gå til "Run", sett Level1 som Main Scene
+
+Åpne Level1 scenen og lag ditt første
+level! 
+Foreslår å lage et litt avlangt rom
+med dører midt på hver langside
+som forbipasserende kan komme gjennom
+(spilleren skal være på en side av rommet
+og kaste mat på roboter på den andre siden)
+
+Bruk duplisering, flytting og rotering.
+
+Når du tester må du bruke Alt-F4
+for å avslutte spillet.
+(siden vi har "fanget" musepekeren)
+
+Lykke til!
+
+La oss legge til kasting av mat.
+
+Vi vil kaste maten fra foran spilleren:
+Åpne Player scenen
+Åpne Character scenen
++ node, skriv "pos", velg "Position3D"
+rename noden til "Forward"
+flytt noden opp til foran spilleren
+(blå pil peker forover)
+Ctrl-S for å lagre,
+Gå til Player scenen og sjekk at forward er plassert riktig
+
+La oss lage en scene for prosjetiler
+Lag en ny scene
++ node, skriv "rig", velg "RigidBody"
+rename til "Projectile"
+
++ node, skriv "mesh", velg "MeshInstance"
+velg "Sphere" som Mesh (en slags default)
+Klikk på topp noden
++ node, skriv "collis", velg "CollisionShape"
+velg "new SphereShape" som Shape
+Ctrl-S for å lagre scenen under Scenes/Ammo
+
+Gå til Character scenen
+Lag et nytt tomt skript, velg scripts mappa
+
+Finn Character.gd i FilSystem under scripts
+Høyreklikk, velg "Kopier Sti"
+
+Gå til første linje i PLayer skriptet
+endre til (bruk Ctrl-V):
+extends "res://Scripts/Character.gd"
+
+Gå til Prosjektinnstillinger, Input Map
+skriv "fire" klikk Legg Til,
+Velg "fire", klikk + ikonet
+velg musknapp (mouse button)
+velg venstre museknapp (left mouse button)
+
+Gå til Character skriptet
+
+lag en ny funksjon:
+
+func fire():
+	print("fire!"")
+
+Gå til Player skriptet
+lage en ny funksjon:
+
+func _input(event):
+	if Input.is_action_just_pressed("fire"):
+		fire()
+
+Test spillet, sjekk Output vinduet
+når du trykker venstre musetast
+
+Gå til Character skriptet, legg inn:
+
+const PROJECTILE_SPEED = 50
+
+func fire():
+	var bullet = load("res://Scenes/Ammo/Projectile.tscn").instance()
+	add_child(bullet)
+	bullet.set_as_toplevel(true)
+	bullet.global_transform = $Forward.global_transform
+	var character_forward = get_global_transform().basis[2].normalized()
+	bullet.set_linear_velocity(character_forward * PROJECTILE_SPEED)
+	bullet.add_collision_exception_with(self)
+
+Test spillet, får du kastet noe?
+
+La oss gjøre projetile litt mindre
+
+Gå til Projetile scenen,
+endre størrelsen til 0.5
+endre størrelsen på kollisjons sonen til 0.5
+endre massen til 0.5 (Kilo)
+
+Utfordring:
+	Få ballene til å forsvinne etter 3 sekunder
+
+
+Løsning:
+
+Gå til Projectile scenen
+
+Lag et tomt skript i Scripts mappa
+
+Marker topp noden
+Legg til en Timer node
+Sett Wait Time til 3 sekunder
+Skru på Autostart
+Gå til Node tabben i inspektøren
+Velg TimeOut, Klikk "Koble til" knappen
+Sjekk at "Projectile" er valgt,
+Klikk på "Koble til" Knappen
+
+Endre _on_Timer_timeout funksjonen til:
+	queue_free()
+
+Lag en ny mappe under Scenes/Ammo
+kall den "Ammo_models"
+
+Utfordring:
+
+Lag to scener med mat som arver fra Projectile
+og lagre dem i "Ammo_models" mappa.
+
+Kommer vi hit er det veldig bra.
