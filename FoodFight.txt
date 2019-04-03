@@ -261,6 +261,79 @@ kall den "Ammo_models"
 
 Utfordring:
 
-Lag to scener med mat som arver fra Projectile
+Lag scener med mat som arver fra Projectile
 og lagre dem i "Ammo_models" mappa.
 
+Tips:
+Ny Avet scene fra Projectile scenen
+Velg Topp noden
++ Node, skriv mesh, velg MeshInstance
+(du har nå to meshinstancer)
+Skjul Meshinstance som innholder ballen
+Velg "Mat" som mesh for MeshInstance2
+Endre størrelse og posisjon så den passer i kollisjon-sonen
+Endre Navn på topp-noden til Mat-navn
+Lagre i "Ammo_models" mappa
+
+Noen modeller må du endre størrelsen på for å få dem
+til å passe med kollisjons-sonen (drikke, milkshake...),
+Noen må du flytte litt siden origo ikke er i senter (milkshake)
+
+Gå til Character skriptet, legg inn:
+
+var ammo_types = {0: "res://Scenes/Ammo/Ammo_models/Burger.tscn",
+									1: "res://Scenes/Ammo/Ammo_models/Cookie.tscn"}
+
+func _enter_tree():
+	randomize()
+
+func fire():
+	var random_bullet = ammo_types[randi() % ammo_types.size()]
+	var bullet = load(random_bullet).instance()
+	...
+
+
+Test Spillet, se om det funker!
+
+La oss gjøre det enklere å legge til å fjerne ammunisjon.
+
+Lag et nytt skript "file_grabber", under scripts mappa.
+
+La oss gjøre dette skriptet til en "Singleton" så det kjøres automatisk.
+Prosjektinnstillinger, Autoload, finn skriptet, sett det til enabled
+
+Legg inn koden:
+
+func get_files(folder):
+	var gathered_files = {}
+	var file_count = 0
+	var dir = Directory.new()
+	
+	dir.open(folder)
+	dir.list_dir_begin()
+	
+	while true:
+		var file = dir.get_next()
+		if file == "":
+			break
+		elif not file.begins_with("."):
+			gathered_files[file_count] = folder + file
+			file_count += 1
+			
+	return gathered_files
+
+(pass på innrykket for return linja)
+
+Ctrl-S for å lagre
+
+Gå til Character skriptet, endre til:
+
+var ammo_types = {}
+
+func _enter_tree():
+	ammo_types = file_grabber.get_files("res://Scenes/Ammo/Ammo_models/")
+	randomize()
+	
+Test Spillet, kan du kaste all mat?
+
+Kommer vi hit er det veldig bra!!
