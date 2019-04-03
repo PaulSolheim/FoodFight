@@ -210,6 +210,8 @@ func _input(event):
 Test spillet, sjekk Output vinduet
 når du trykker venstre musetast
 
+HIT
+
 Gå til Character skriptet, legg inn:
 
 const PROJECTILE_SPEED = 50
@@ -262,4 +264,3 @@ Utfordring:
 Lag to scener med mat som arver fra Projectile
 og lagre dem i "Ammo_models" mappa.
 
-Kommer vi hit er det veldig bra.
