@@ -237,7 +237,6 @@ endre massen til 0.5 (Kilo)
 Utfordring:
 	Få ballene til å forsvinne etter 3 sekunder
 
-
 Løsning:
 
 Gå til Projectile scenen
@@ -278,6 +277,8 @@ Lagre i "Ammo_models" mappa
 Noen modeller må du endre størrelsen på for å få dem
 til å passe med kollisjons-sonen (drikke, milkshake...),
 Noen må du flytte litt siden origo ikke er i senter (milkshake)
+
+HIT
 
 Gå til Character skriptet, legg inn:
 
@@ -336,4 +337,61 @@ func _enter_tree():
 	
 Test Spillet, kan du kaste all mat?
 
-Kommer vi hit er det veldig bra!!
+La oss legge inn en timer så vi
+begrenser hvor ofte vi kan kaste mat.
+
+Gå til Character scenen,
+Klikk på Topp noden
++ for å legge til en node
+skriv "tim", velg Timer
+rename til "CanFire"
+sett egenskapen "One Shot"
+Koble TimeOut til skriptet (node, timeout, koble til)
+
+Legg til:
+
+var can_fire = true
+
+func _on_CanFire_timeout():
+	can_fire = true
+
+Gå til Player skriptet
+Gå til slutten av skriptet
+endre til:
+
+func _input(event):
+	if Input.is_action_just_pressed("fire"):
+		try_to_fire()
+
+
+func try_to_fire()
+	if can_fire:
+		fire()
+		can_fire = false
+		$CanFire.start()
+
+Test spillet, må du vente 1 sekund?
+
+La oss legge til Whoosh-lyd
+Gå til Projectile scenen
+Klikk på Topp noden
++ for å legge til node
+skriv "audio", velge AudioStreamPlayer3D
+
+I filsystem, gå til "SFX" mappa
+Dra Explosion2.wav til Stream egenskapen
+Aktiver "AutoPlay" egenskapen
+
+Gå til Player scenen
+Klikk "Camera" i hierarkiet
+Sett "Doppler Tracking" til "Physics"
+(Bug i Godot gir røde feilmeldinger, har ikke noe å si)
+
+Gå tilbake til Projectile scenen
+Klikk "AudioStreamPlayer3D"
+Sett "Max Fadeout" til 50 (meter)
+Sett "Unit Db" til -10
+
+Test Spillet, hører du doppler effekten?
+
+
