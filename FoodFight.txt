@@ -364,7 +364,7 @@ func _input(event):
 		try_to_fire()
 
 
-func try_to_fire()
+func try_to_fire():
 	if can_fire:
 		fire()
 		can_fire = false
@@ -389,9 +389,14 @@ Sett "Doppler Tracking" til "Physics"
 
 Gå tilbake til Projectile scenen
 Klikk "AudioStreamPlayer3D"
-Sett "Max Fadeout" til 50 (meter)
+Sett "Max Distance" til 50 (meter)
 Sett "Unit Db" til -10
 
 Test Spillet, hører du doppler effekten?
 
+Kommer vi hit kan vi lage et nytt spawn
+for bystanders, flytte til andre siden
+rotere 180 grader og teste det.
+
+HIT
 

@@ -21,7 +21,7 @@ transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.94471, 0.2, 0 )
 
 [node name="WindowSil3" parent="Walls" index="1" instance=ExtResource( 2 )]
 
-transform = Transform( -0.5, 0, -4.37114e-008, 0, 0.5, 0, 4.37114e-008, 0, -0.5, 7.32033, 0.2, 27.2678 )
+transform = Transform( -0.43245, 0, -3.7806e-008, 0, 0.5, 0, 4.37114e-008, 0, -0.5, 7.77794, 0.2, 27.2678 )
 
 [node name="WindowSil4" parent="Walls" index="2" instance=ExtResource( 2 )]
 
@@ -97,7 +97,7 @@ transform = Transform( -0.5, 0, 4.37114e-008, 0, 0.5, 0, -4.37114e-008, 0, -0.5,
 
 [node name="Wall9" parent="Walls" index="20" instance=ExtResource( 3 )]
 
-transform = Transform( 0.415738, 0, 0, 0, 0.502007, 0, 0, 0, 0.502007, 9.28652, 0.2, 0 )
+transform = Transform( 0.293807, 0, 0, 0, 0.502007, 0, 0, 0, 0.502007, 9.28652, 0.2, 0 )
 
 [node name="Wall10" parent="Walls" index="21" instance=ExtResource( 3 )]
 
@@ -157,11 +157,11 @@ transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -8.02071, 0.2, 0 )
 
 [node name="DoorWayWide2" parent="Walls" index="35" instance=ExtResource( 6 )]
 
-transform = Transform( -0.5, 0, -4.37114e-008, 0, 0.5, 0, 4.37114e-008, 0, -0.5, 4.70184, 0.2, 27.2518 )
+transform = Transform( -0.736479, 0, -6.4385e-008, 0, 0.515739, 0, 4.50874e-008, 0, -0.515739, 4.28979, 0.2, 27.2518 )
 
 [node name="DoorWayWide3" parent="Walls" index="36" instance=ExtResource( 6 )]
 
-transform = Transform( -0.5, 0, -4.37114e-008, 0, 0.5, 0, 4.37114e-008, 0, -0.5, 4.70184, 0.2, 0 )
+transform = Transform( -0.65023, 0, -5.6845e-008, 0, 0.505735, 0, 4.37114e-008, 0, -0.5, 4.70184, 0.2, 0 )
 
 [node name="Window" type="MeshInstance" parent="Walls" index="37"]
 
@@ -301,6 +301,12 @@ transform = Transform( -1, 0, -8.74228e-008, 0, 1, 0, 8.74228e-008, 0, -1, 0, 0.
 
 [node name="Spawner" parent="Spawners" index="0" instance=ExtResource( 8 )]
 
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.7396, 0.471955, -0.961573 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.7, 0.4, -0.75 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="Spawner2" parent="Spawners" index="1" instance=ExtResource( 8 )]
+
+transform = Transform( -1, 0, -8.74228e-008, 0, 1, 0, 8.74228e-008, 0, -1, 6.8, 0.4, 28 )
+_sections_unfolded = [ "Transform" ]
 
 

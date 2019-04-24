@@ -106,5 +106,10 @@ func animate():
 
 func _input(event):
 	if Input.is_action_just_pressed("fire"):
+		try_to_fire()
+
+func try_to_fire():
+	if can_fire:
 		fire()
-	
+		can_fire = false
+		$CanFire.start()

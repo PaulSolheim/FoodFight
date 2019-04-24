@@ -35,15 +35,15 @@ data = {
 "type": "blend2"
 }, {
 "filter": [  ],
-"from": "Idle",
-"id": "Idleanim",
-"position": Vector2( 162, 68 ),
-"type": "animation"
-}, {
-"filter": [  ],
 "from": "Run",
 "id": "Walkanim",
 "position": Vector2( 165, 203 ),
+"type": "animation"
+}, {
+"filter": [  ],
+"from": "Idle",
+"id": "Idleanim",
+"position": Vector2( 162, 68 ),
 "type": "animation"
 } ]
 }
@@ -56,7 +56,7 @@ cull_mask = 1048575
 environment = null
 h_offset = 0.0
 v_offset = 0.0
-doppler_tracking = 0
+doppler_tracking = 2
 projection = 0
 current = false
 fov = 70.0
