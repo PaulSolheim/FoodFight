@@ -398,5 +398,13 @@ Kommer vi hit kan vi lage et nytt spawn
 for bystanders, flytte til andre siden
 rotere 180 grader og teste det.
 
+Har gjort ferdig Bystanders.
+
 HIT
 
+Hent ned siste versjon fra Github
+
+La oss lage Robot NPCs
+
+Åpne scenen:
+Scenes/Characters/Robot/Robot.tscn
