@@ -408,3 +408,111 @@ La oss lage Robot NPCs
 
 Åpne scenen:
 Scenes/Characters/Robot/Robot.tscn
+
+Aktiver toppnoden
+klikk + skriv "ray"
+Velg Raycast, klikk Lag-knappen
+Dra Raycast komponenten oppover til midten på roboten
+endre "CastTo" til
+x:0 y:0 z:50
+Skru på Enabled og Exclude Parent
+
+Ctrl-S for å lagre scenen
+
+Åpne Level1 scenen
+Lag en Node (+ "node")
+Kall den "Robots"
+Lenk inn en Robot-scene 
+(fra scene/chararcters/robot/Robot.tscn)
+Plasser den der den skal starte
+(motsatt side av Player)
+
+Lag et nytt skript for Robot som arver fra Character.gd
+(velg Scripts mappa for Robot.gd)
+
+Skriv:
+
+func _physics_process(delta):
+	if $RayCast.is_colliding():
+		fire()
+		
+Test spillet, hva skjer?
+
+La oss fikse det med Kollisjonsmasker
+Åpne Prosjektinnstillinger
+Gå til Layer Names / 3d Physics
+
+Legg inn
+Layer 1		Terrain
+Layer 2		Player
+Layer 3		NPC
+Layer 4		Food
+
+Klikk Lukk-knappen
+
+Åpne Player scenen
+Gå til PhysicsBody / Collision
+Sett Layer til Player
+Sett Mask til Terrain, NPC og Food
+
+Gå til Robot scenen
+Gå til PhysicsBody / Collision
+Sett Layer til Robot
+Sett Mask til Terrain, Player og Food
+
+Åpne Projectile scenen
+(under scenes/Ammo mappa)
+Gå til PhysicsBody / Collision
+Sett Layer til Food
+Sett Mask til Terrain, Player, NPC og Food
+
+Gå til robot scenen
+Velg RayCast i hierarkiet
+Sett "Collision Mask" til kun "Player"
+
+Test Spillet, hva skjer nå?
+
+Gå til Robot scriptet,
+endre til:
+
+func _physics_process(delta):
+	if $RayCast.is_colliding() and can_fire:
+		fire()
+		can_fire = false
+		$CanFire.start()
+
+Test spillet, sjekk at roboten bar
+skyter en gang i sekundet.
+
+La oss fikse så roboten får animasjon
+
+Legg til i robot skripet:
+
+func _ready():
+	$RobotArmature/AnimationPlayer.get_animation("Robot_Running").set_loop(true)
+	
+Test spillet, har roboten animasjon?
+(Du må kanskje løfte roboten litt høyere)
+
+Aktiver toppnoden i Robot scenen
++ skriv "anim", velg AnimationPlayer
+Rename til "PositionAnimation"
+
+Ctrl-S for å lagre
+
+Gå til Level1 scenen
+Dra roboten til venstre side i rommet
+Under Robot/PositionAnimation
+lag en ny animasjon, kall den "movement"
+Under Robot, lag en ny nøkkel for Translation
+Sett lengden til 4 sekunder, med 1 sekund step
+Marker 2 sekunders merket,
+flytt roboten til høyre side
+lag ny nøkkel for Translation
+Skru på Loop og Autostart
+
+Test Spillet: 
+flytter roboten fra side til side?
+Blir vi skutt på?
+
+Kult!, så langt kom jeg.
