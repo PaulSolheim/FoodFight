@@ -481,7 +481,7 @@ func _physics_process(delta):
 		can_fire = false
 		$CanFire.start()
 
-Test spillet, sjekk at roboten bar
+Test spillet, sjekk at roboten bare
 skyter en gang i sekundet.
 
 La oss fikse så roboten får animasjon
