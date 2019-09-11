@@ -113,3 +113,7 @@ func try_to_fire():
 		fire()
 		can_fire = false
 		$CanFire.start()
+
+func hurt():
+	pass
+	
