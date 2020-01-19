@@ -13,6 +13,11 @@ const DECCEL = 15
 const JUMP_SPEED = 15
 const GRAVITY = -45
 
+# ammo variabler
+var max_ammo = 5
+var ammo = 0
+var can_refill = false
+
 # animation constants
 const BLEND_MINIMUM = 0.125
 const RUN_BLEND_AMOUNT = 0.1
@@ -109,11 +114,38 @@ func _input(event):
 		try_to_fire()
 
 func try_to_fire():
-	if can_fire:
+	if can_fire and ammo > 0:
 		fire()
 		can_fire = false
 		$CanFire.start()
+		ammo -= 1
+		update_GUI()
 
 func hurt():
 	pass
 	
+
+func _on_RefillTimer_timeout():
+	ammo += 1
+	update_GUI()
+	if check_ammo():
+		$RefillTimer.start()
+
+func check_ammo():
+	if ammo < max_ammo:
+		return true
+
+func RefillArea_entered():
+	if check_ammo():
+		$RefillTimer.start()
+		can_refill = true
+
+func RefillArea_exited():
+	$RefillTimer.stop()
+	can_refill = false
+	
+func update_GUI():
+	get_node("../GUI/Label").text = str(ammo)
+
+
+
